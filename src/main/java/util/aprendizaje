@@ -1,0 +1,49 @@
+QUE APRENDI DE ESTE PROYECTO
+
+1: QUE EL CODIGO DE persistence.xml SEA COMPATIBLE: Al utilizar JAKARTA, que es una version nueva de PERSISTENCE, debo 
+utilizar el prefijo "jakarta" en las propiedades del persistence.xml. Tal que quede asi:
+
+    <properties>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistema_reservas_turnos?serverTimezone=UTC"/>
+      <property name="jakarta.persistence.jdbc.user" value="root"/>
+      <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="jakarta.persistence.jdbc.password" value=""/>
+      <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+
+2: UTILIZAR FIND(Cuenta.class, id): Este metodo de "em" (EntityManager) busca una Cuenta que tenga el "id" especificado.
+Pero FIND solo busca a traves de clave primaria, es decir, si yo quiero buscar una cuenta a traves de otro parametro, 
+find no me sirve. "Cuenta.class" hace referencia a que se quiere encontrar un objeto de esa clase, nada mas.
+
+3: CÓMO SE MANEJAN LAS CONTRASEÑAS EN UN SISTEMA DE LOGIN/REGISTRE: Primero, normalmente no se intenta iniciar sesion 
+buscando solamente la CONTRASEÑA de una CUENTA. Se busca por EMAIL, y luego se compara la contraseña que tenga la cuenta
+encontrada mediante el Email con la contraseña ingresada por el usuario. Todo esto utilizando el metodo "createQuery".
+
+4: CREACION DE CONTRASEÑAS MEDIANTE HASH: Algo IMPORTANTE (PARA APRENDER) es que las contraseñas no se guardan  en 
+"texto plano", es decir, no se guarda literalmente lo que el usuario ingresa. Lo que se hace es que se genera un HASH para
+la contraseña y luego cuando queremos comparar dos contraseñas lo hacemos a travez de esos HASHSES. ESTE ES UN TEMA PARA
+PROFUNDIZAR EN UN FUTURO.
+
+5: METODO "createQuery": Pensaba que ya habia aprendido al menos lo basico de JPA, pero, una vez mas, me doy cuenta de 
+lo poco que sé, Y ESTA BIEN. El metodo  "createQuery" es muy importante para poder manejar consultas personalizadas, 
+utilizando el lenguaje JPQL, que es muy parecido a SQL.
+
+¿COMO FUNCIONA createQuery? 
+Primero tenemos que crear una consulta y utilizar dentro de ella el metodo createQuery:
+TypedQuery<Cuenta> consulta = em.createQuery(
+                "SELECT c FROM Cuenta c WHERE c.cliente.email = :email", Cuenta.class);
+
+Esta consulta se lee: "Selecciona los objetos tipo Cuenta donde el "email" sea igual a ":email". Este ultimo es un 
+parametro que hay que asignarle un valor.
+                
+SEGUNDO: Asignarle un valor al parametro:
+consulta.setParameter("email", email);
+Al parametro "email" se le asigna el valor de la varible 'email'.
+
+TERCERO: Recuperar el resultado:
+List<Cuenta> listaCuenta = consulta.getResultList();
+En la lista "listaCuenta" se le asigna el resultado de la consulta utilizando el metodo "getResultList" sobre la
+consulta.
+
+De esta forma logramos buscar una cuenta especifica a traves de atributos como el "email" de un Cliente y la 
+"contrasena" de una Cuenta. (VER METODO iniciarSesion() EN CuentaService)

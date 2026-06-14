@@ -15,6 +15,11 @@ public class Vista {
                 + "RECUERDA VERIFICAR HABER PUESTO CORRECTAMENTE LOS DATOS!");
     }
     
+    public void iniciarSesion(){
+        System.out.println("-- INICIAR SESION --\n"
+                + "Te vamos a pedir que ingreses tu GMAIL y CONTRASEÑA\n");
+    }
+    
     public void mostrarMensaje(String msj){
         System.out.println(msj);
     }
