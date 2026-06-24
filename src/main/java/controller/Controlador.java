@@ -1,10 +1,13 @@
 package controller;
 
 /*PAQUETES IMPORTADOS*/
+import exceptions.CuentaNoEncontradaException;
 import java.util.InputMismatchException;
+import java.util.List;
 import model.*;
 import view.Vista;
 import persistence.*;
+import persistence.exceptions.NonexistentEntityException;
 import validations.Validaciones;
 
 public class Controlador {
@@ -58,38 +61,161 @@ public class Controlador {
         this.validaciones = validaciones;
     }
 
-    public void ejecutar() {
+    /*METODO PARA EJECUTAR EL SISTEMA*/
+    public void ejecutar() throws CuentaNoEncontradaException, NonexistentEntityException {
+        /*BUCLE PARA EJECUTAR EL PROGRAMA CONSTANTEMENTE*/
         while (ejecutarPrograma) {
+            /*TRY-CATCH QUE ENVUELVE TODO EL CODIGO PARA CAPTURAR EXCEPCION DE DATOS NO VALIDOS*/
             try {
+                /*IF QUE VERIFICA SI EL USUARIO SE CREÓ UNA CUENTA O INICIÓ SESION - OBLIGA AL USUARIO A HACERLO*/
                 if (serviceCuenta.isCuentaCreada() != true) {
+                    /*MENSAJE PRINCIPAL DEL SISTEMA - CREAR UNA CUENTA O INICIAR SESION*/
                     vista.mensajePrincipal();
                     int decision = vista.getInputInt();
                     vista.limpiarBuffed();
+
                     if (decision == 1) {
+                        /*ALGORITMO PARA REGISTRARSE (CREAR UNA CUENTA)*/
                         vista.registrarse();
                         String nombre = validaciones.validarNombre("Ingresa tu nombre: ", vista.getScanner());
                         int telefono = validaciones.validarTelefono("Ingresa tu telefono: ", vista.getScanner());
                         String email = validaciones.validarEmail("Ingresa tu email: ", vista.getScanner());
                         String contrasena = validaciones.validarContrasena("Ingresa tu contrasena: ", vista.getScanner());
                         Cliente cliente = new Cliente(nombre, telefono, email);
-                        Cuenta cuenta = new Cuenta(contrasena, cliente);
+                        Cuenta cuentaGenerada = new Cuenta(contrasena, cliente);
                         serviceCliente.crearCliente(cliente);
-                        serviceCuenta.crearCuenta(cuenta);
+                        serviceCuenta.crearCuenta(cuentaGenerada);
                         vista.mostrarMensaje("Cuenta creada satisfactoriamente!\n");
-                    } 
-                    if(decision == 2) {
+                        cuenta = cuentaGenerada;
+                    }
+                    if (decision == 2) {
+                        /*ALGORITMO PARA INICIAR SESION*/
                         vista.iniciarSesion();
-                        String email = validaciones.validarEmail("Escribe tu Gmail: ", vista.getScanner());
-                        String contrasena = validaciones.validarContrasena("Escribe tu contrasena: ", vista.getScanner());
-                        if(serviceCuenta.iniciarSesion(email, contrasena) == true){
-                            vista.mostrarMensaje("Sesion iniciada correctamente!"); 
-                        } else {vista.mostrarMensaje("ERROR: Contrasena incorrecta.");} 
-                    } else {
-                        vista.mostrarMensaje("ERROR: Dato incorrecto."); 
+
+                        /*TRY-CATCH PARA CAPTURAR UNA EXCEPCION*/
+                        try {
+                            cuenta = serviceCuenta.iniciarSesion();
+                            vista.mostrarMensaje("Sesion iniciada correctamente!\n");
+                        } catch (CuentaNoEncontradaException e) {
+                            vista.mostrarMensaje("ERROR Capturado: " + e.getMessage());
+                        }
+                    } else if (decision != 1 && decision != 2) {
+                        vista.mostrarMensaje("ERROR: Dato incorrecto.\n");
+                    }
+                } else if (serviceCuenta.isCuentaCreada() == true) {
+                    /*MENSAJE DE OPCIONES Y ENTRADA DE DATO DEL USUARIO*/
+                    vista.menuDeOpciones();
+                    int operacion = vista.getInputInt();
+                    vista.limpiarBuffed();
+
+                    /*SWITCH CON TODAS LAS OPCIONES DEL SISTEMA*/
+                    switch (operacion) {
+                        case 1:
+                            /*MODIFICAR DATOS DE MI CUENTA*/
+                            vista.mensajeModificarDatos();
+                            int modificar = vista.getInputInt();
+                            vista.limpiarBuffed();
+                            switch (modificar) {
+                                case 1:
+                                    /*MODIFICAR NOMBRE*/
+                                    vista.mensajeModificarNombre();
+                                    String nombreNuevo = validaciones.validarNombre("Nombre nuevo: ", vista.getScanner());
+                                    serviceCliente.modificarNombre(cuenta.getId(), nombreNuevo);
+                                    vista.mostrarMensaje("Nombre modificado exitosamente!\n");
+                                    break;
+                                case 2:
+                                    /*MODIFICAR TELEFONO*/
+                                    vista.mensajeModificarTelefono();
+                                    int telefonoNuevo = validaciones.validarTelefono("Numero de telefono nuevo: ", vista.getScanner());
+                                    serviceCliente.modificarTelefono(cuenta.getId(), telefonoNuevo);
+                                    vista.mostrarMensaje("Numero de telefono modificado exitosamente!\n");
+                                    break;
+                                case 3:
+                                    /*MODIFICAR EMAIL*/
+                                    vista.mensajeModificarEmail();
+                                    String emailNuevo = validaciones.validarEmail("Email nuevo: ", vista.getScanner());
+                                    serviceCliente.modificarEmail(cuenta.getId(), emailNuevo);
+                                    vista.mostrarMensaje("Email modificado exitosamente!\n");
+                                    break;
+                                case 4:
+                                    /*MODIFICAR CONTRASENA*/
+                                    vista.mensajeModificarContrasena();
+                                    String contrasenaNueva = validaciones.validarContrasena("Contrasena nueva: ", vista.getScanner());
+                                    serviceCuenta.modificarContrasena(cuenta.getId(), contrasenaNueva);
+                                    vista.mostrarMensaje("Contrasena modificada exitosamente!\n");
+                                    break;
+                                default:
+                                    vista.mostrarMensaje("ERROR: Dato no reconocido.\n");
+                                    break;
+                            }
+                            break;
+                        case 2:
+                            /*ELIMINAR UNA CUENTA*/
+                            vista.mensajeEliminarCuenta();
+                            int idCuentaEliminada = vista.getInputInt();
+                            vista.limpiarBuffed();
+
+                            /*TRY-CATCH PARA CAPTURAR LA EXCEPCION*/
+                            try {
+                                serviceCuenta.eliminarCuenta(idCuentaEliminada);
+                                vista.mostrarMensaje("Cuenta eliminada correctamente!\n");
+                            } catch (NonexistentEntityException e) {
+                                vista.mostrarMensaje("ERROR Capturado: La cuenta con el ID " + idCuentaEliminada + " no existe.\n");
+                            }
+                            break;
+                        case 3:
+                            /*BUSCAR CUENTA*/
+                            vista.mensajeBuscarUnaCuenta();
+
+                            /*TRY-CATCH PARA CAPTURAR LA EXCEPCION*/
+                            try {
+                                String email = validaciones.validarEmail("Email de la cuenta: ", vista.getScanner());
+                                List<Cuenta> cuentaEncontrada = serviceCuenta.buscarCuenta(email);
+                                vista.mostrarDatosCuentaEncontrada(cuentaEncontrada);
+                            } catch (CuentaNoEncontradaException e) {
+                                vista.mostrarMensaje("ERROR Capturado: Cuenta no encontrada\n");
+                            }
+                            break;
+                        case 4:
+                            /*MOSTRAR LISTADO DE CLIENTES*/
+                            vista.mensajeVerClientes();
+                            List<Cliente> listaClientes = serviceCliente.verClientesRegistrados();
+                            vista.mostrarClientes(listaClientes);
+                            break;
+                        case 5:
+                            /*CREAR UN TURNO*/
+                            break;
+                        case 6:
+                            /*VER TURNOS*/
+                            break;
+                        case 7:
+                            /*REPROGRAMAR UN TURNO*/
+                            break;
+                        case 8:
+                            /*CANCELAR UN TURNO*/
+                            break;
+                        case 9:
+                            /*CREAR SERVICIO*/
+                            break;
+                        case 10:
+                            /*MODIFICAR UN SERVICIO*/
+                            break;
+                        case 11:
+                            /*ELIMINAR UN SERVICIO*/
+                            break;
+                        case 12:
+                            /*SALIR*/
+                            vista.mostrarMensaje("Vuelve pronto!");
+                            vista.cerrarScanner();
+                            ejecutarPrograma = false;
+                            break;
+                        default:
+                            vista.mostrarMensaje("ERROR: Dato no reconocido.\n");
+                            break;
                     }
                 }
             } catch (InputMismatchException e) {
-                vista.mostrarMensaje("ERROR: Dato invalido.");
+                vista.mostrarMensaje("ERROR: Dato invalido.\n");
                 vista.limpiarBuffed();
             }
         }

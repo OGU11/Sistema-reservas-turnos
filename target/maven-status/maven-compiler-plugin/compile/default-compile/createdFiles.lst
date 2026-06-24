@@ -1,3 +1,4 @@
+exceptions\CuentaNoEncontradaException.class
 validations\Validaciones.class
 model\Cuenta.class
 model\ClienteService.class
@@ -17,6 +18,7 @@ persistence\CuentaJpaController.class
 persistence\TurnoJpaController.class
 persistence\exceptions\NonexistentEntityException.class
 model\Servicio.class
+model\Excepciones.class
 com\mycompany\sistemareservasturnos\SistemaReservasTurnos.class
 controller\Controlador.class
 model\Profesional.class

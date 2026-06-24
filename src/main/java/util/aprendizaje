@@ -47,3 +47,27 @@ consulta.
 
 De esta forma logramos buscar una cuenta especifica a traves de atributos como el "email" de un Cliente y la 
 "contrasena" de una Cuenta. (VER METODO iniciarSesion() EN CuentaService)
+
+6: PALABRA RESERVADA "super": Esta palabra reservada es algo muy básico de la Programacion Orientada a Objetos. Me 
+permite poder utilizar metodos, atributos de la clase superior, por ejemplo, yo en mi clase Hija sobreescribo un metodo
+de mi clase Padre utilizando "Override" y "super", y le agrego las funcionalidades extras que correspondan. Tambien, la
+palabra reservada "super" se utiliza para inicializar el constructor de la clase superior, esto lo hago yo en  mi clase
+Excepciones para inicializar el constructor de la clase Exception que devuelve un "message".
+
+7: "LA INSTANCIA UNIVERSAL": El metodo para iniciar sesion me hizo darme cuenta que el concepto de "acceder a una cuenta"
+quiere decir "depositar la información de una cuenta encontrada en una instancia que sirva para ello" y asi poder utilizar 
+sus atributos, siendo el ID el más importante. La idea es que, al registrar y al iniciar sesion, devuelvas la cuenta que
+creaste (en el caso de registrarse) o que encontraste (en el caso de iniciar sesion) y la guardes en una instancia de 
+Cuenta. Esa instancia te servirá para poder utilizar los atributos de cuelquier cuenta a la que quieras iniciar sesion.
+
+COMMITS QUE HICE Y SUS DETALLES:
+COMMIT 1: Implementé un sistema para poder registrarse (crear una cuenta) o iniciar sesion. Todas las entradas de datos
+tienen un sistema de validacion para que el usuario no pueda ingresar datos invalidos.
+
+COMMIT 2: Con el sistema de registro y login completados, en este commit implementé la "navegacion" del proyecto agregando
+un mensaje que lista las funcionalidades del sistema y ademas implementé varios algoritmos para poder permitir la 
+GESTION DEL CLIENTE. Las funcionalidades que desarrolle fueron: 
+"1- Modificar datos de mi cuenta"
+"2- Eliminar una cuenta"
+"3- Buscar una cuenta"
+"4- Mostrar listado de clientes registrados" 

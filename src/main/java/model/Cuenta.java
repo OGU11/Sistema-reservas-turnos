@@ -11,6 +11,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 
+/*ANOTACION QUE INDICA QUE LA CLASE ES UNA ENTIDAD*/
 @Entity
 @Table(name="cuenta")
 public class Cuenta implements Serializable {
@@ -27,9 +28,11 @@ public class Cuenta implements Serializable {
     @JoinColumn(name="id_cliente")
     private Cliente cliente;
 
-    /*CONSTRUCTORES*/
+    /*CONSTRUCTOR VACIO*/
     public Cuenta() {
     }
+    
+    /*CONSTRUCTOR*/
     public Cuenta(String contrasena, Cliente cliente) {
         this.contrasena = contrasena;
         this.cliente = cliente;

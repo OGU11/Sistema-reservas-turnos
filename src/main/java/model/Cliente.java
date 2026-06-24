@@ -1,5 +1,6 @@
 package model;
 
+/*PAQUETES IMPORTADOS*/
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,9 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 
+/*ANOTACION PARA INDICAR COMO CLASE ENTIDAD*/
 @Entity
 @Table(name="cliente")
 public class Cliente implements Serializable {
+    /*VARIABLES ATRIBUTOS + MAPEO DE LOS ATRIBUTOS DE LA BASE DE DATOS*/
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -25,15 +28,18 @@ public class Cliente implements Serializable {
     @Column(name="email")
     private String email;
 
+    /*CONSTRUCTOR VACIO*/
     public Cliente() {
     }
 
+    /*CONSTRUCTOR*/
     public Cliente(String nombre, int telefono, String email) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
     }
 
+    /*GETTERS Y SETTERS*/
     public int getId() {
         return id;
     }

@@ -1,5 +1,6 @@
 package model;
 
+/*PAQUETES IMPORTADOS*/
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,13 +15,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import model.Turno.Estado;
 
+/*ANOTACION QUE INDICA QUE LA CLASE ES UNA ENTIDAD*/
 @Entity
 @Table(name="turno")
 public class Turno implements Serializable {
+    /*ENUM*/
     public enum Estado{
         DISPONIBLE, RESERVADO, CONFIRMADO, ATENDIDO
     }
     
+    /*VARIABLES ATRIBUTOS + MAPEO DE LOS ATRIBUTOS DE LA BASE DE DATOS*/
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -45,9 +49,11 @@ public class Turno implements Serializable {
     @JoinColumn(name="servicio_id")
     private Servicio servicio;
 
+    /*CONSTRUCTOR VACIO*/
     public Turno() {
     }
 
+    /*CONSTRUCTOR*/
     public Turno(LocalDate fechaHora, Estado estado, Cliente clienteId, Profesional profesionalId, Servicio servicio) {
         this.fechaHora = fechaHora;
         this.estado = estado;
@@ -56,6 +62,7 @@ public class Turno implements Serializable {
         this.servicio = servicio;
     }
 
+    /*GETTERS Y SETTERS*/
     public int getId() {
         return id;
     }
