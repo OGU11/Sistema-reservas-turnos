@@ -1,6 +1,7 @@
 package model;
 
 /*PAQUETES IMPORTADOS*/
+import exceptions.CuentaDuplicadaException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -45,6 +46,19 @@ public class CuentaService {
     public void crearCuenta(Cuenta cuenta) {
         cuentaJpa.create(cuenta);
         cuentaCreada = true;
+    }
+    
+    /*METODO PARA VALIDAR CUENTA DUPLICADA*/
+    public boolean validarCuentaDuplicada(int telefono, String email, String contrasena) throws CuentaDuplicadaException{
+        boolean cuentaDuplicada = false;
+        List<Cuenta> listaCuenta = cuentaJpa.findCuentaEntities();
+        for (Cuenta c : listaCuenta){
+            if (c.getContrasena().equals(contrasena) || c.getCliente().getTelefono() == telefono || c.getCliente().getEmail().equals(email)) {
+                cuentaDuplicada = true;
+                throw new CuentaDuplicadaException("");
+            } 
+        }
+        return cuentaDuplicada;
     }
 
     /*METODO PARA INICIAR SESION*/

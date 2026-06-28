@@ -16,6 +16,7 @@ persistence\ClienteJpaController.class
 persistence\ServicioJpaController.class
 persistence\CuentaJpaController.class
 persistence\TurnoJpaController.class
+exceptions\CuentaDuplicadaException.class
 persistence\exceptions\NonexistentEntityException.class
 model\Servicio.class
 model\Excepciones.class

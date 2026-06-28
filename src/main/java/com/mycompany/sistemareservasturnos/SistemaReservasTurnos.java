@@ -3,6 +3,7 @@ package com.mycompany.sistemareservasturnos;
 /*PAQUETES IMPORTADOS*/
 import model.*;
 import controller.Controlador;
+import exceptions.CuentaDuplicadaException;
 import exceptions.CuentaNoEncontradaException;
 import persistence.*;
 import persistence.exceptions.NonexistentEntityException;
@@ -11,7 +12,7 @@ import view.Vista;
 
 public class SistemaReservasTurnos {
 
-    public static void main(String[] args) throws CuentaNoEncontradaException, NonexistentEntityException{
+    public static void main(String[] args) throws CuentaNoEncontradaException, NonexistentEntityException, CuentaDuplicadaException{
         /*VARIABLES DE PERSISTENCE*/
         ClienteJpaController clienteJpa = new ClienteJpaController();
         CuentaJpaController cuentaJpa = new CuentaJpaController();

@@ -1,6 +1,7 @@
 package controller;
 
 /*PAQUETES IMPORTADOS*/
+import exceptions.CuentaDuplicadaException;
 import exceptions.CuentaNoEncontradaException;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -62,7 +63,7 @@ public class Controlador {
     }
 
     /*METODO PARA EJECUTAR EL SISTEMA*/
-    public void ejecutar() throws CuentaNoEncontradaException, NonexistentEntityException {
+    public void ejecutar() throws CuentaNoEncontradaException, NonexistentEntityException, CuentaDuplicadaException {
         /*BUCLE PARA EJECUTAR EL PROGRAMA CONSTANTEMENTE*/
         while (ejecutarPrograma) {
             /*TRY-CATCH QUE ENVUELVE TODO EL CODIGO PARA CAPTURAR EXCEPCION DE DATOS NO VALIDOS*/
@@ -83,10 +84,18 @@ public class Controlador {
                         String contrasena = validaciones.validarContrasena("Ingresa tu contrasena: ", vista.getScanner());
                         Cliente cliente = new Cliente(nombre, telefono, email);
                         Cuenta cuentaGenerada = new Cuenta(contrasena, cliente);
-                        serviceCliente.crearCliente(cliente);
-                        serviceCuenta.crearCuenta(cuentaGenerada);
-                        vista.mostrarMensaje("Cuenta creada satisfactoriamente!\n");
-                        cuenta = cuentaGenerada;
+                        
+                        /*TRY-CATCH PARA CAPTURAR EXCEPCION*/
+                        try{
+                            if(serviceCuenta.validarCuentaDuplicada(telefono, email, contrasena) != true){
+                                serviceCliente.crearCliente(cliente);
+                                serviceCuenta.crearCuenta(cuentaGenerada);
+                                vista.mostrarMensaje("Cuenta creada satisfactoriamente!\n");
+                                cuenta = cuentaGenerada;
+                            }
+                        }catch(CuentaDuplicadaException e){
+                            vista.mostrarMensaje("ERROR Capturado: El/los dato/s que has ingresado ya fueron utilizados. Intenta con otros.\n");
+                        } 
                     }
                     if (decision == 2) {
                         /*ALGORITMO PARA INICIAR SESION*/

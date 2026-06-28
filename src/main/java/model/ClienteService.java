@@ -1,6 +1,7 @@
 package model;
 
 /*PAQUETES IMPORTADOS*/
+import exceptions.CuentaDuplicadaException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -25,7 +26,7 @@ public class ClienteService {
     
     
     /*METODO PARA CREAR CLIENTE*/
-    public void crearCliente(Cliente cliente){
+    public void crearCliente(Cliente cliente) {
         clienteJpa.create(cliente); 
     }
     

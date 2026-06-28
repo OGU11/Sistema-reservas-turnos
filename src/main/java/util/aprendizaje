@@ -71,3 +71,6 @@ GESTION DEL CLIENTE. Las funcionalidades que desarrolle fueron:
 "2- Eliminar una cuenta"
 "3- Buscar una cuenta"
 "4- Mostrar listado de clientes registrados" 
+
+COMMIT 3: Este commit solo fué para actualizar el Sistema de registro e inicio de sesion agregandole una validacion para
+no permitir Cuentas con el mismo: Email, Telefono y Contrasena.
