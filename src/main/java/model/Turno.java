@@ -40,26 +40,16 @@ public class Turno implements Serializable {
     @ManyToOne
     @JoinColumn(name="cliente_id")
     private Cliente clienteId;
-    
-    @ManyToOne
-    @JoinColumn(name="profesional_id")
-    private Profesional profesionalId;
-    
-    @ManyToOne
-    @JoinColumn(name="servicio_id")
-    private Servicio servicio;
 
     /*CONSTRUCTOR VACIO*/
     public Turno() {
     }
 
     /*CONSTRUCTOR*/
-    public Turno(LocalDate fechaHora, Estado estado, Cliente clienteId, Profesional profesionalId, Servicio servicio) {
+    public Turno(LocalDate fechaHora, Estado estado, Cliente clienteId) {
         this.fechaHora = fechaHora;
         this.estado = estado;
         this.clienteId = clienteId;
-        this.profesionalId = profesionalId;
-        this.servicio = servicio;
     }
 
     /*GETTERS Y SETTERS*/
@@ -93,21 +83,5 @@ public class Turno implements Serializable {
 
     public void setClienteId(Cliente clienteId) {
         this.clienteId = clienteId;
-    }
-
-    public Profesional getProfesionalId() {
-        return profesionalId;
-    }
-
-    public void setProfesionalId(Profesional profesionalId) {
-        this.profesionalId = profesionalId;
-    }
-
-    public Servicio getServicio() {
-        return servicio;
-    }
-
-    public void setServicio(Servicio servicio) {
-        this.servicio = servicio;
     }
 }

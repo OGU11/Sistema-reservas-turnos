@@ -6,9 +6,11 @@ C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\ClienteService.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\Cuenta.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\CuentaService.java
+C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\Especialidad.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\Excepciones.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\Profesional.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\ProfesionalService.java
+C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\ProfesionalServicio.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\Servicio.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\ServicioService.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\model\Turno.java
@@ -16,11 +18,15 @@ C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\ClienteJpaController.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\ClienteJpaController1.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\CuentaJpaController.java
+C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\EspecialidadJpaController.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\exceptions\IllegalOrphanException.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\exceptions\NonexistentEntityException.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\exceptions\PreexistingEntityException.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\ProfesionalJpaController.java
+C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\ProfesionalJpaController1.java
+C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\ProfesionalServicioJpaController.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\ServicioJpaController.java
+C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\ServicioJpaController1.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\persistence\TurnoJpaController.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\validations\Validaciones.java
 C:\Users\Usuario\Documents\NetBeansProjects\SistemaReservasTurnos\src\main\java\view\Vista.java

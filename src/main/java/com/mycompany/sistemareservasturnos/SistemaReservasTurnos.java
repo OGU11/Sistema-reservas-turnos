@@ -19,6 +19,8 @@ public class SistemaReservasTurnos {
         ProfesionalJpaController profesionalJpa = new ProfesionalJpaController();
         ServicioJpaController servicioJpa = new ServicioJpaController();
         TurnoJpaController turnoJpa = new TurnoJpaController();
+        EspecialidadJpaController especialidadJpa = new EspecialidadJpaController();
+        ProfesionalServicioJpaController profesionalServicioJpa = new ProfesionalServicioJpaController();
         
         /*VARIABLES DE VALIDATIONS*/
         Validaciones validaciones = new Validaciones();
@@ -32,14 +34,16 @@ public class SistemaReservasTurnos {
         Profesional profesional = new Profesional();
         Servicio servicio = new Servicio();
         Turno turno = new Turno();
+        Especialidad especialidad = new Especialidad();
+        ProfesionalServicio profesionalServicio = new ProfesionalServicio();
         ClienteService clienteServicio = new ClienteService(clienteJpa); 
         CuentaService cuentaServicio = new CuentaService(cuentaJpa, validaciones, vista, clienteJpa); 
-        ProfesionalService profesionalServicio = new ProfesionalService();
+        ProfesionalService profesionalService = new ProfesionalService();
         ServicioService serviceServicio = new ServicioService();
         TurnoService turnoServicio = new TurnoService();
         
         /*VARIABLES DE CONTROLLER*/
-        Controlador controlador = new Controlador(cliente, cuenta, profesional, turno, servicio, clienteServicio, cuentaServicio, profesionalServicio, turnoServicio, serviceServicio, vista, clienteJpa, cuentaJpa, profesionalJpa, turnoJpa, servicioJpa, validaciones);
+        Controlador controlador = new Controlador(cliente, cuenta, profesional, turno, servicio, especialidad, profesionalServicio, clienteServicio, cuentaServicio, profesionalService, turnoServicio, serviceServicio, vista, clienteJpa, cuentaJpa, profesionalJpa, turnoJpa, servicioJpa, especialidadJpa, profesionalServicioJpa, validaciones);
         /*METODO ejecutar DE CONTROLADOR*/
         controlador.ejecutar();   
     }

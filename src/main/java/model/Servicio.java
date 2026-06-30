@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 
@@ -22,17 +24,17 @@ public class Servicio implements Serializable {
     @Column(name="nombre")
     private String nombre;
     
-    @Column(name="duracion")
-    private String duracion;
+    @ManyToOne
+    @JoinColumn(name="especialidad_id")
+    private Especialidad especialidad;
 
     /*CONSTRUCTOR VACIO*/
     public Servicio() {
     }
 
     /*CONSTRUCTOR*/
-    public Servicio(String nombre, String duracion) {
+    public Servicio(String nombre) {
         this.nombre = nombre;
-        this.duracion = duracion;
     }
 
     /*GETTERS Y SETTERS*/
@@ -51,14 +53,5 @@ public class Servicio implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(String duracion) {
-        this.duracion = duracion;
-    }
-    
     
 }

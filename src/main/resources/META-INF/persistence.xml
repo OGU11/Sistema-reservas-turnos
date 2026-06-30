@@ -7,6 +7,8 @@
     <class>model.Turno</class>
     <class>model.Servicio</class>
     <class>model.Cuenta</class>
+    <class>model.Especialidad</class>
+    <class>model.ProfesionalServicio</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistema_reservas_turnos?serverTimezone=UTC"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>

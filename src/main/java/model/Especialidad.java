@@ -1,6 +1,5 @@
 package model;
 
-/*PAQUETES IMPORTADOS*/
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,11 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 
-/*ANOTACION PARA INDICAR COMO CLASE ENTIDAD*/
 @Entity
-@Table(name="profesional")
-public class Profesional implements Serializable {
-    /*VARIABLES ATRIBUTOS + MAPEO DE LOS ATRIBUTOS DE LA BASE DE DATOS*/
+@Table(name="especialidad")
+public class Especialidad implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -21,21 +18,14 @@ public class Profesional implements Serializable {
     
     @Column(name="nombre")
     private String nombre;
-    
-    @Column(name="matricula")
-    private int matricula;
 
-    /*CONSTRUCTOR VACIO*/
-    public Profesional() {
+    public Especialidad() {
     }
 
-    /*CONSTRUCTOR*/
-    public Profesional(String nombre, int matricula) {
+    public Especialidad(String nombre) {
         this.nombre = nombre;
-        this.matricula = matricula;
     }
 
-    /*GETTERS Y SETTERS*/
     public int getId() {
         return id;
     }
@@ -51,12 +41,6 @@ public class Profesional implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public int getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(int matricula) {
-        this.matricula = matricula;
-    }
+    
+    
 }

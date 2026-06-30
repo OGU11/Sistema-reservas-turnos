@@ -22,6 +22,8 @@ public class Controlador {
     private Profesional profesional;
     private Turno turno;
     private Servicio servicio;
+    private Especialidad especialidad;
+    private ProfesionalServicio profesionalServicio;
     private ClienteService serviceCliente;
     private CuentaService serviceCuenta;
     private ProfesionalService serviceProfesional;
@@ -37,17 +39,21 @@ public class Controlador {
     private ProfesionalJpaController profesionalJpa;
     private TurnoJpaController turnoJpa;
     private ServicioJpaController servicioJpa;
+    private EspecialidadJpaController especialidadJpa;
+    private ProfesionalServicioJpaController profesionalServicioJpa;
 
     /*VARIABLES DE VALIDATIONS*/
     private Validaciones validaciones;
 
     /*CONSTRUCTOR*/
-    public Controlador(Cliente cliente, Cuenta cuenta, Profesional profesional, Turno turno, Servicio servicio, ClienteService serviceCliente, CuentaService serviceCuenta, ProfesionalService serviceProfesional, TurnoService serviceTurno, ServicioService serviceServicio, Vista vista, ClienteJpaController clienteJpa, CuentaJpaController cuentaJpa, ProfesionalJpaController profesionalJpa, TurnoJpaController turnoJpa, ServicioJpaController servicioJpa, Validaciones validaciones) {
+    public Controlador(Cliente cliente, Cuenta cuenta, Profesional profesional, Turno turno, Servicio servicio, Especialidad especialidad, ProfesionalServicio profesionalServicio, ClienteService serviceCliente, CuentaService serviceCuenta, ProfesionalService serviceProfesional, TurnoService serviceTurno, ServicioService serviceServicio, Vista vista, ClienteJpaController clienteJpa, CuentaJpaController cuentaJpa, ProfesionalJpaController profesionalJpa, TurnoJpaController turnoJpa, ServicioJpaController servicioJpa, EspecialidadJpaController especialidadJpa, ProfesionalServicioJpaController profesionalServicioJpa, Validaciones validaciones) {
         this.cliente = cliente;
         this.cuenta = cuenta;
         this.profesional = profesional;
         this.turno = turno;
         this.servicio = servicio;
+        this.especialidad = especialidad;
+        this.profesionalServicio = profesionalServicio;
         this.serviceCliente = serviceCliente;
         this.serviceCuenta = serviceCuenta;
         this.serviceProfesional = serviceProfesional;
@@ -59,6 +65,8 @@ public class Controlador {
         this.profesionalJpa = profesionalJpa;
         this.turnoJpa = turnoJpa;
         this.servicioJpa = servicioJpa;
+        this.especialidadJpa = especialidadJpa;
+        this.profesionalServicioJpa = profesionalServicioJpa;
         this.validaciones = validaciones;
     }
 
@@ -192,25 +200,25 @@ public class Controlador {
                             vista.mostrarClientes(listaClientes);
                             break;
                         case 5:
-                            /*CREAR UN TURNO*/
+                            /*CREAR UN SERVICIO*/
                             break;
                         case 6:
-                            /*VER TURNOS*/
+                            /*MODIFICAR SERVICIO*/
                             break;
                         case 7:
-                            /*REPROGRAMAR UN TURNO*/
+                            /*ELIMINAR SERVICIO*/
                             break;
                         case 8:
-                            /*CANCELAR UN TURNO*/
+                            /*CREAR UN TURNO*/
                             break;
                         case 9:
-                            /*CREAR SERVICIO*/
+                            /*VER TURNO/S*/
                             break;
                         case 10:
-                            /*MODIFICAR UN SERVICIO*/
+                            /*REPROGRAMAR UN TURNO*/
                             break;
                         case 11:
-                            /*ELIMINAR UN SERVICIO*/
+                            /*CANCELAR DE TURNO*/
                             break;
                         case 12:
                             /*SALIR*/
